@@ -1,0 +1,13 @@
+package wys.java.wanandroid.presenter;
+
+public abstract class BasePresenter<T> {
+    public T mView;
+
+    public void attach(T view){
+        this.mView=mView;
+    }
+
+    public void detach(){
+        mView=null;
+    }
+}

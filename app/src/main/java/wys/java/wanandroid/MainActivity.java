@@ -49,7 +49,12 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         //设置图片集合
         banner.setImages(urls);
         //banner设置方法全部调用完毕时最后调用
-        banner.start();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    banner.start();
+                }
+            });
         }
     }
 }

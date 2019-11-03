@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">WysJavaWanAndroid</string>
+    <string name="my_collection">我的收藏</string>
+    <string name="todo">todo</string>
+    <string name="night_mode">夜间模式</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_title">主页</string>
+    <string name="navigation_title">导航</string>
+    <string name="tree_title">体系</string>
+    <string name="project_title">项目</string>
+    <string name="wx_title">公众号</string>
 </resources>

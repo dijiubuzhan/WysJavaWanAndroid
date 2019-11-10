@@ -30,7 +30,7 @@ public class MainPresenter extends BasePresenter<IMainView> implements IMainPree
           @Override
           public void success(Call call, Response response) throws IOException {
               String str = response.body().string();
-              LogUtil.i("str=" + str);
+             // LogUtil.i("str=" + str);
               BannerBean bannerBean=new Gson().fromJson(str,BannerBean.class);
               if (bannerBean!=null && bannerBean.getData()!=null && bannerBean.getData().size()>0) {
                   for (BannerBean.DataBean dataBean : bannerBean.getData()) {

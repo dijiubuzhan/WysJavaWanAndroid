@@ -22,6 +22,7 @@ import wys.java.wanandroid.moudle.navigation.NavigationFragment;
 import wys.java.wanandroid.moudle.project.ProjectFragment;
 import wys.java.wanandroid.moudle.wxAccounts.WxAccountsFragment;
 import wys.java.wanandroid.presenter.MainPresenter;
+import wys.java.wanandroid.utils.LogUtil;
 
 public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
     private static final int FRAGMENT_HOME =0 ;
@@ -42,18 +43,17 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        LogUtil.d("onCreate");
         initView();
     }
 
     private void initView() {
         bottomNavigationView=findViewById(R.id.design_bottom_sheet);
+        showFragment(currentIndex);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    case R.id.home:
-                        showFragment(FRAGMENT_HOME);
-                        break;
                     case R.id.navigation:
                         showFragment(FRAGMENT_NAVIGATION);
                         break;
@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
                     case R.id.wx_title:
                         showFragment(FRAGMENT_WX_ACCOUNTS);
                         break;
+                    default:
+                        showFragment(FRAGMENT_HOME);
+                        break;
                 }
                 return true;
             }
@@ -77,14 +80,6 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         hideFragment(fragmentTransaction);
         currentIndex=fragmentId;
         switch (currentIndex){
-            case FRAGMENT_HOME:
-                if (homeFragment==null) {
-                    homeFragment=HomeFragment.newInstance();
-                    fragmentTransaction.add(R.id.content,homeFragment,HomeFragment.class.getName());
-                }else {
-                    fragmentTransaction.show(homeFragment);
-                }
-                break;
             case FRAGMENT_NAVIGATION:
                 if (navigationFragment==null) {
                     navigationFragment=NavigationFragment.newInstance();
@@ -110,13 +105,22 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
                 }
                 break;
             case FRAGMENT_WX_ACCOUNTS:
-                if (wxAccountsFragment==null) {
-                    wxAccountsFragment=WxAccountsFragment.newInstance();
-                    fragmentTransaction.add(R.id.content,wxAccountsFragment,WxAccountsFragment.class.getName());
-                }else {
+                if (wxAccountsFragment == null) {
+                    wxAccountsFragment = WxAccountsFragment.newInstance();
+                    fragmentTransaction.add(R.id.content, wxAccountsFragment, WxAccountsFragment.class.getName());
+                } else {
                     fragmentTransaction.show(wxAccountsFragment);
                 }
                 break;
+            default:
+                if (homeFragment == null) {
+                    homeFragment = HomeFragment.newInstance();
+                    fragmentTransaction.add(R.id.content, homeFragment, HomeFragment.class.getName());
+                } else {
+                    fragmentTransaction.show(homeFragment);
+                }
+                break;
+
         }
         fragmentTransaction.commit();
     }

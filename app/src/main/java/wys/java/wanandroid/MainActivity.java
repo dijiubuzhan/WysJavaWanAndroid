@@ -2,9 +2,11 @@ package wys.java.wanandroid;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private ProjectFragment projectFragment;
     private WxAccountsFragment wxAccountsFragment;
     private int currentIndex;
+    private NavigationView navigationView;
+    private static boolean night=false;
 
 
     @Override
@@ -50,6 +54,25 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private void initView() {
         bottomNavigationView=findViewById(R.id.design_bottom_sheet);
         showFragment(currentIndex);
+        navigationView=findViewById(R.id.nav);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.nightMode:
+                        if (night) {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            night=false;
+                        }else {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                            night=true;
+                        }
+                        recreate();
+                        break;
+                }
+                return true;
+            }
+        });
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

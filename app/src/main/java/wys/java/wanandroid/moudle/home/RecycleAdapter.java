@@ -58,10 +58,10 @@ public class RecycleAdapter extends RecyclerView.Adapter {
             holder.author.setText("作者："+mDatas.get(position).getAuthor());
         }
         if (!TextUtils.isEmpty(mDatas.get(position).getSuperChapterName())) {
-            holder.category.setText("分类"+mDatas.get(position).getSuperChapterName());
+            holder.category.setText("分类:"+mDatas.get(position).getSuperChapterName());
         }
         if (!TextUtils.isEmpty(mDatas.get(position).getNiceShareDate())) {
-            holder.time.setText("时间"+mDatas.get(position).getNiceShareDate());
+            holder.time.setText("时间:"+mDatas.get(position).getNiceShareDate());
         }
     }
 
